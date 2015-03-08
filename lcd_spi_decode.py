@@ -1,3 +1,4 @@
+#!/usr/bin/env python -u
 import sys
 import re
 
@@ -21,8 +22,7 @@ def chunks(l, n):
 if __name__ == "__main__":
 
     synced = False
-    f = open("boo")
-    for line in f:
+    for line in sys.stdin:
 
         # cut newline
         line = line[:-1]
