@@ -3,7 +3,6 @@ CFLAGS	=	-Wall -Os -DTRUE=1 -DFALSE=0
 
 VERSION	=	\"V0.10\"
 CFLAGS	+=	-DVERSION=$(VERSION)
-#LDFLAGS += 	-lcurses
 
 #######################################################################
 

@@ -23,7 +23,7 @@
 #include <conio.h>
 #include <windef.h>
 #else
-//#include <curses.h>
+#include <signal.h>
 #endif
 
 #include "buspirate.h"
@@ -65,10 +65,28 @@ int print_usage(char * appname)
 	}
 
 
+int fd;
 
 int main(int argc, char** argv)
 {
 int opt;
+
+#ifndef WIN32
+
+void sigint_handler(int dummy){
+    char buf[6];
+    buf[0]=0x00;//exit sniffer
+    buf[1]=0x00;//exit spi
+    buf[2]=0x0f;//exit BBIO
+    serial_write( fd, buf, 3);
+    printf(" (Bye for now!)\n");
+    exit(0);
+
+}
+
+signal(SIGINT, sigint_handler);
+#endif
+
   char buffer[256] = {0}, i;
   int fd;
   int res,c;
