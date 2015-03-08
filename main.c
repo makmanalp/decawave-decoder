@@ -79,7 +79,6 @@ void sigint_handler(int dummy){
     buf[1]=0x0f;//exit BBIO
     serial_write( fd, buf, 2);
     serial_close(fd);
-    printf(" (Bye for now!)\n");
     exit(0);
 
 }
@@ -222,7 +221,7 @@ while ((opt = getopt(argc, argv, "ms:p:e:d:r:")) != -1) {
 	//
 	serial_setup(fd,(speed_t) atoi(param_speed));
 
-	printf(" Starting SPI sniffer...\n");
+	fprintf(stderr, " Starting SPI sniffer...\n");
 
 
 	if (modem==TRUE){    // connected to modem for testing response	{
@@ -272,7 +271,7 @@ while ((opt = getopt(argc, argv, "ms:p:e:d:r:")) != -1) {
 	}
 
 
-	printf(" (OK) Happy sniffing! Press ctrl-c to stop.\n");
+	fprintf(stderr, " (OK) Happy sniffing! Press ctrl-c to stop.\n");
 
     //
     // Loop and print input from the serial port
