@@ -1,4 +1,4 @@
-#!/usr/bin/env python -u
+#!/usr/bin/env python
 import sys
 import re
 
@@ -22,7 +22,11 @@ def chunks(l, n):
 if __name__ == "__main__":
 
     synced = False
-    for line in sys.stdin:
+    while True:
+
+        # There is a reason why I'm reading this way rather than doing for line
+        # in stdin: buffering issues
+        line = sys.stdin.readline()
 
         # cut newline
         line = line[:-1]
@@ -56,4 +60,4 @@ if __name__ == "__main__":
                     print "LAST: ", parsed[0][1]
                 else:
                     print "AVG8: ", parsed[0][1]
-
+            sys.stdout.flush()
