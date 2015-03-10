@@ -78,6 +78,7 @@ void sigint_handler(int dummy){
     buf[0]=0x00;//exit sniffer
     buf[1]=0x0f;//exit BBIO
     serial_write( fd, buf, 2);
+//    printf(serial_read(fd, 1));  // Look inside of serial.h
     serial_close(fd);
     exit(0);
 
