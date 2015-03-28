@@ -1,1 +1,1 @@
-./spisniffer -d /dev/kratos_decawave | python -u lcd_spi_decode.py
+./spisniffer -d /dev/kratos_decawave | python lcd_spi_decode.py
