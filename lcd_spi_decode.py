@@ -22,9 +22,10 @@ def chunks(l, n):
 if __name__ == "__main__":
 
     synced = False
-    for line in sys.stdin:
+    while 1:
 
         # cut newline
+	line = sys.stdin.readline()
         line = line[:-1]
 
         if not synced:
