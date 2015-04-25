@@ -1,6 +1,7 @@
 #!/usr/bin/env python -u
 import sys
 import re
+import zmq
 
 BUSPIRATE_RE = re.compile(r"\(0x([0-9a-zA-Z]{2})\)")
 DECAWAVE_LCD_RE = re.compile(r"(LAST|AVG8):.*(\d{1,3}\.\d{1,3}).*m")
@@ -17,6 +18,23 @@ def chunks(l, n):
     """
     for i in xrange(0, len(l), n):
         yield l[i:i+n]
+
+
+def print_parsed(parsed):
+    if parsed[0][0] == "LAST":
+        print "LAST: ", parsed[0][1]
+    else:
+        print "AVG8: ", parsed[0][1]
+
+context = zmq.Context()
+publisher = context.socket(zmq.PUB)
+publisher.bind("0.0.0.0:5560")
+
+def broadcast_parsed(parsed):
+    if parsed[0][0] == "LAST":
+        publisher.send(("LAST", parsed[0][1]))
+    else:
+        publisher.send(("AVG8", parsed[0][1]))
 
 
 if __name__ == "__main__":
@@ -53,8 +71,5 @@ if __name__ == "__main__":
             parsed =  DECAWAVE_LCD_RE.findall(message)
 
             if len(parsed) > 0:
-                if parsed[0][0] == "LAST":
-                    print "LAST: ", parsed[0][1]
-                else:
-                    print "AVG8: ", parsed[0][1]
-
+                print_parsed()
+                broadcast_parsed()
