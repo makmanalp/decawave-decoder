@@ -4,7 +4,7 @@ import re
 import zmq
 
 BUSPIRATE_RE = re.compile(r"\(0x([0-9a-zA-Z]{2})\)")
-DECAWAVE_LCD_RE = re.compile(r"(LAST|AVG8):.*(\d{1,3}\.\d{1,3}).*m")
+DECAWAVE_LCD_RE = re.compile(r"(LAST|AVG8): .*(\d{1,3}\.\d{1,3}).*m")
 
 def hex2bin(x):
     assert len(x) == 2
