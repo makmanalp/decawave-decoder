@@ -28,13 +28,13 @@ def print_parsed(parsed):
 
 context = zmq.Context()
 publisher = context.socket(zmq.PUB)
-publisher.bind("0.0.0.0:5560")
+publisher.bind("tcp://0.0.0.0:5560")
 
 def broadcast_parsed(parsed):
     if parsed[0][0] == "LAST":
-        publisher.send(("LAST", parsed[0][1]))
+        publisher.send("LAST: {}".format(parsed[0][1]))
     else:
-        publisher.send(("AVG8", parsed[0][1]))
+        publisher.send("AVG8: {}".format(parsed[0][1]))
 
 
 if __name__ == "__main__":
@@ -71,5 +71,5 @@ if __name__ == "__main__":
             parsed =  DECAWAVE_LCD_RE.findall(message)
 
             if len(parsed) > 0:
-                print_parsed()
-                broadcast_parsed()
+                print_parsed(parsed)
+                broadcast_parsed(parsed)
