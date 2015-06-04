@@ -41,13 +41,12 @@ if __name__ == "__main__":
 
     synced = False
     while 1:
-
         # cut newline
-	line = sys.stdin.readline()
+        line = sys.stdin.readline()
         line = line[:-1]
 
         if not synced:
-            sys.stderr.write("Syncing - got: {}".format(line))
+            sys.stderr.write("Syncing - got: {}\n".format(line))
             if line == "Sync":
                 synced = True
         else:
@@ -72,4 +71,4 @@ if __name__ == "__main__":
 
             if len(parsed) > 0:
                 print_parsed(parsed)
-                broadcast_parsed(parsed)
+                broadcast_parsed(parsed)            
