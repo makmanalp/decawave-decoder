@@ -49,6 +49,9 @@ if __name__ == "__main__":
             sys.stderr.write("Syncing - got: {}\n".format(line))
             if line == "Sync":
                 synced = True
+                print("If code freezes here then the buspirate is working but the Decawave isn't printing values")
+                print("Perhaps you need to turn one of the Decawaves on, or power cycle the robot Decawave")
+                print("The base station Decawave needs to be powered on first. If data prints, you're golden!")
         else:
 
             # Parse bus pirate formatting like [0x00(0x12)]
